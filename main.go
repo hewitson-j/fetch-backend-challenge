@@ -1,20 +1,11 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
-
-	"github.com/gin-gonic/gin"
+	"fetch-backend-challenge/routes"
 )
 
 func main(){
-	r := gin.Default()
-
-	r.GET("/test", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{"Message": "Success!"})
-
-		fmt.Println("Test route accessed.")
-	})
+	r := routes.SetupRouter()
 
 	r.Run(":8080")
 }
