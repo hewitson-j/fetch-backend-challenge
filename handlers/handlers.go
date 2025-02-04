@@ -4,6 +4,7 @@ import (
 	"fetch-backend-challenge/models"
 	"fetch-backend-challenge/storage"
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -24,6 +25,7 @@ func ProcessReceipt(ctx *gin.Context){
 	receiptId := uuid.New().String()
 
 	storage.SaveReceipt(receiptId, receipt)
+	log.Println("Saved " + receiptId)
 
 	ctx.JSON(http.StatusOK, gin.H{"id":receiptId})
 }
