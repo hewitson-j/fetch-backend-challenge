@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"fetch-backend-challenge/handlers"
 	"fmt"
 	"net/http"
 
@@ -15,6 +16,9 @@ func SetupRouter() *gin.Engine{
 
 		fmt.Println("Test route accessed.")
 	})
+
+	r.POST("/receipts/process", handlers.ProcessReceipt)
+	// r.GET("/receipts/:id/points", handlers.GetPoints)
 
 	return r
 }
