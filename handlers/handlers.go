@@ -3,7 +3,6 @@ package handlers
 import (
 	"fetch-backend-challenge/models"
 	"fetch-backend-challenge/storage"
-	"fmt"
 	"log"
 	"net/http"
 
@@ -15,12 +14,12 @@ func ProcessReceipt(ctx *gin.Context){
 	var receipt models.Receipt
 
 	if err := ctx.ShouldBindJSON(&receipt); err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "The receipt is invalid."})
 
 		return
 	}
 
-	fmt.Println("Processing receipt...")
+	log.Println("Processing receipt...")
 
 	receiptId := uuid.New().String()
 
@@ -36,7 +35,7 @@ func GetPoints(ctx *gin.Context){
 	receipt, exists := storage.GetReceipt(receiptId)
 
 	if !exists {
-		ctx.JSON(http.StatusNotFound, gin.H{"error": "Receipt not found"})
+		ctx.JSON(http.StatusNotFound, gin.H{"error": "No receipt found for that ID."})
 		return
 	}
 
